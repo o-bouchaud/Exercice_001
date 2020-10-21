@@ -289,6 +289,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   maxSpeed: 20
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1366098716
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,9 +387,9 @@ GameObject:
   - component: {fileID: 6935710259322022719}
   - component: {fileID: 6935710259322022716}
   - component: {fileID: 6935710259322022717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground_Placeholder
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

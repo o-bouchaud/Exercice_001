@@ -7,11 +7,17 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float maxSpeed;
+    [SerializeField] private LayerMask ground;
 
     private Rigidbody2D myRigidbody2D;
 
-    private Vector2 stickDirection;
+ 
 
+    private Animator myAnimator;
+    private SpriteRenderer myRenderer;
+
+    private Vector2 stickDirection;
+    private bool isOnGround = false;
 
     private void OnEnable()
     {
@@ -36,7 +42,10 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
+        myRenderer = GetComponent<SpriteRenderer>();
     }
+
 
     void FixedUpdate()
     {
@@ -47,5 +56,18 @@ public class PlayerBehavior : MonoBehaviour
             myRigidbody2D.AddForce(direction * speed);
         }
 
+        var isWalking = isOnGround && Mathf.Abs(myRigidbody2D.velocity.x) > 0.1f;
+        myAnimator.SetBool("isWalking", isWalking);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        var touchingGround = ground == (ground | (1 << other.gameObject.layer));
+
+        if (touchingGround)
+        {
+            isOnGround = true;
+        }
     }
 }
