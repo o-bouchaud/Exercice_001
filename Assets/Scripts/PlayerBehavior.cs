@@ -7,6 +7,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float maxSpeed;
+    [SerializeField] private float jumpForce;
     [SerializeField] private LayerMask ground;
 
     private Rigidbody2D myRigidbody2D;
@@ -25,6 +26,17 @@ public class PlayerBehavior : MonoBehaviour
         playerController.Enable();
         playerController.Main.Move.performed += MoveOnPerformed;
         playerController.Main.Move.canceled += MoveOnCanceled;
+        playerController.Main.Jump.performed += JumpOnPerformed;
+
+    }
+
+    private void JumpOnPerformed(InputAction.CallbackContext obj)
+    {
+        if (isOnGround)
+        {
+            myRigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isOnGround = false;
+        }
 
     }
 
@@ -58,6 +70,8 @@ public class PlayerBehavior : MonoBehaviour
 
         var isWalking = isOnGround && Mathf.Abs(myRigidbody2D.velocity.x) > 0.1f;
         myAnimator.SetBool("isWalking", isWalking);
+
+        var isJumping = !isOnGround && myRigidbody2D.velocity.y != 0;
 
         Flip();
 
