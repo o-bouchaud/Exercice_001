@@ -72,6 +72,7 @@ public class PlayerBehavior : MonoBehaviour
         myAnimator.SetBool("isWalking", isWalking);
 
         var isJumping = !isOnGround && myRigidbody2D.velocity.y != 0;
+        myAnimator.SetBool("isJumping", isJumping);
 
         Flip();
 
@@ -95,7 +96,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         var touchingGround = ground == (ground | (1 << other.gameObject.layer));
 
-        if (touchingGround)
+        var touchFromAbove = other.contacts[0].normal.y > other.contacts[0].normal.x;
+
+        if (touchingGround && touchFromAbove)
         {
             isOnGround = true;
         }
