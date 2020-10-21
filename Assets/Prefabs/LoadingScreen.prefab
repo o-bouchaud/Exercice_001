@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1200275562373144847}
   - component: {fileID: 1200275562373144851}
   m_Layer: 5
-  m_Name: LoadingScreen 1
+  m_Name: LoadingScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ Animator:
   m_GameObject: {fileID: 1200275562373144846}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 35cb5f3a9a88d0b4fb5802417fd606c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
