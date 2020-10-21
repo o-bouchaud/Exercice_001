@@ -11,13 +11,13 @@ public class PlayerBehavior : MonoBehaviour
 
     private Rigidbody2D myRigidbody2D;
 
- 
 
     private Animator myAnimator;
     private SpriteRenderer myRenderer;
 
     private Vector2 stickDirection;
     private bool isOnGround = false;
+    private bool isFacingLeft = true;
 
     private void OnEnable()
     {
@@ -59,6 +59,22 @@ public class PlayerBehavior : MonoBehaviour
         var isWalking = isOnGround && Mathf.Abs(myRigidbody2D.velocity.x) > 0.1f;
         myAnimator.SetBool("isWalking", isWalking);
 
+        Flip();
+
+    }
+
+    private void Flip()
+    {
+        if (stickDirection.x < -0.1f)
+        {
+            isFacingLeft = true;
+        }
+
+        if (stickDirection.x > 0.1f)
+        {
+            isFacingLeft = false;
+        }
+        myRenderer.flipX = isFacingLeft;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
