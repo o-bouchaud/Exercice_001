@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private LayerMask ground;
+    [SerializeField] private GameObject bullet;
 
     private Rigidbody2D myRigidbody2D;
 
@@ -27,7 +28,13 @@ public class PlayerBehavior : MonoBehaviour
         playerController.Main.Move.performed += MoveOnPerformed;
         playerController.Main.Move.canceled += MoveOnCanceled;
         playerController.Main.Jump.performed += JumpOnPerformed;
+        playerController.Main.Shoot.performed += ShootOnperformed;
 
+    }
+
+    private void ShootOnperformed(InputAction.CallbackContext obj)
+    {
+        Instantiate(bullet, transform.position, Quaternion.identity);
     }
 
     private void JumpOnPerformed(InputAction.CallbackContext obj)
